@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Albion Craft Scout</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#0d1117;color:#e6edf3;font-family:Arial,sans-serif}
+main{max-width:760px;margin:auto;padding:14px}.card{background:#161b22;border:1px solid #30363d;border-radius:12px;padding:16px;margin-bottom:12px}
+h1{margin:0 0 6px;font-size:23px}p{margin:6px 0;color:#8b949e}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+label{display:block;color:#8b949e;font-size:13px;margin-bottom:5px}input,button{width:100%;padding:12px;border-radius:8px;border:1px solid #30363d;background:#0d1117;color:#e6edf3;font-size:15px}
+button{background:#238636;border:0;font-weight:bold;margin-top:12px}table{width:100%;border-collapse:collapse;margin-top:10px}
+td{padding:10px 4px;border-bottom:1px solid #30363d}td:last-child{text-align:right;font-weight:bold}
+@media(max-width:600px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body><main>
+<div class="card"><h1>Albion Craft Scout</h1><p>Calcolo rapido di costo, ricavo, profitto e ROI.</p></div>
+<div class="card"><div class="grid">
+<div><label>Quantità</label><input id="q" type="number" min="1" value="1"></div>
+<div><label>Costo materiali per pezzo</label><input id="m" type="number" min="0" step="0.01" value="0"></div>
+<div><label>Prezzo vendita per pezzo</label><input id="s" type="number" min="0" step="0.01" value="0"></div>
+<div><label>Costi vendita %</label><input id="t" type="number" min="0" step="0.1" value="0"></div>
+</div><button onclick="calc()">CALCOLA</button></div>
+<div class="card"><table>
+<tr><td>Costo materiali</td><td id="c">0</td></tr>
+<tr><td>Ricavo lordo</td><td id="r">0</td></tr>
+<tr><td>Costi vendita</td><td id="x">0</td></tr>
+<tr><td>Profitto netto</td><td id="p">0</td></tr>
+<tr><td>ROI</td><td id="o">0%</td></tr>
+</table></div>
+</main>
+<script>
+function v(id){return Math.max(0,Number(document.getElementById(id).value)||0)}
+function calc(){let q=Math.max(1,v('q')),m=v('m'),s=v('s'),t=v('t'),c=q*m,r=q*s,x=r*t/100,p=r-x-c,o=c?p/c*100:0;
+document.getElementById('c').textContent=c.toLocaleString('it-IT',{maximumFractionDigits:2});
+document.getElementById('r').textContent=r.toLocaleString('it-IT',{maximumFractionDigits:2});
+document.getElementById('x').textContent=x.toLocaleString('it-IT',{maximumFractionDigits:2});
+document.getElementById('p').textContent=p.toLocaleString('it-IT',{maximumFractionDigits:2});
+document.getElementById('o').textContent=o.toFixed(1)+'%'}
+</script>
+</body></html>
